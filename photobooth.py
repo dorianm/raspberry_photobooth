@@ -30,7 +30,6 @@ class DisplayUI:
         self.background = self.surface.convert()
         
         # Displayed message
-        self.message = ""
         self.little_message = ""
         self.number = ""
         self.image_displayed = ""
