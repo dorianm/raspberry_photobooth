@@ -18,4 +18,4 @@ To be more user-friendly, I add a Xbox 360 Controller and map the P key to the A
 
 ### Note about the printer
 
-The Canon Selphy CP910 has some issues with Cups in USB. The printer can print one picture and then freeze. So after few searches, I found this threads which propose a solution [raspberrypi.org](https://www.raspberrypi.org/forums/viewtopic.php?p=747363#p747363)
+The Canon Selphy CP910 has some issues with Cups in USB. The printer can print only one picture and then freeze. I found this thread which propose a solution [raspberrypi.org](https://www.raspberrypi.org/forums/viewtopic.php?p=747363#p747363)
