@@ -17,6 +17,7 @@ PRINTER_TO_USE = "Canon_CP910_ipp"
 # Where all the pictures will be saved
 SAVE_PATH_ROOT = "/home/pi/Photobooth/out"
 
+
 class DisplayUI:
     """ Manage the UI """
     def __init__(self):
@@ -98,11 +99,7 @@ class Printer:
     def printPhoto(self, photo_path):
         os.system("lpr -P " + PRINTER_TO_USE + " " + photo_path)
 
-
-
-
-
-
+        
 class Camera:
     """ Manage the camera (Raspberry Camera) """
     def __init__(self, displayui, save_path):
@@ -144,7 +141,6 @@ class Camera:
         self.display.set_number("").set_message("").update()
 
         return os.path.join(self.save_path, filename)
-
 
 
 def run():
@@ -205,4 +201,5 @@ def run():
 
     camera.close()
 
-run()
+if __name__ == "__main__":
+    run()
