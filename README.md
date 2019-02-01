@@ -8,7 +8,7 @@ Source code of my project to build a photobooth from a Raspberry Pi v3 and the C
 - Raspberry Camera Module v2
 - Canon Selphy CP910
 - Xbox 360 Controller
-- An awesome wood box made by hand
+- An awesome handmade wood box
 
 ### How it works
 
