@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import datetime
@@ -73,6 +73,7 @@ class Camera:
         self.camera = picamera.PiCamera()
         self.camera.preview_alpha = 120
         self.camera.resolution = (2592, 1944)
+        self.camera.rotation = 180
         self.camera.start_preview()
 
     def close(self):
