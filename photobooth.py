@@ -63,9 +63,9 @@ class DisplayUI:
 class Camera:
     """ Manage the camera (Raspberry Camera) """
 
-    def __init__(self, display, save_path):
+    def __init__(self, display_ui, save_path):
         """ Turn on the camera, and display a message  """
-        self.display = display
+        self.display = display_ui
         self.display.message = "Chargement..."
         self.display.update()
         self.save_path = save_path
