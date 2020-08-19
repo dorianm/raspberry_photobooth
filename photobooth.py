@@ -59,11 +59,6 @@ class DisplayUI:
 
         self.screen.blit(self.background, (0, 0))
 
-        # Draw a rect in the screen to delimit an area
-        # which will be printed (change it if you change the screen or the printer)
-        pygame.draw.rect(self.screen, pygame.Color("white"), (-5, 120, 1690, 840), 1)
-        pygame.display.flip()
-
 
 class Camera:
     """ Manage the camera (Raspberry Camera) """
