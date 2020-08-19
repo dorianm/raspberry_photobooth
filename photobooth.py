@@ -137,7 +137,7 @@ if __name__ == "__main__":
             camera.show_preview()
         else:
             if not image_displayed:
-                display.message = "Appuyer sur A pour prendre une nouvelle photo"\
+                display.message = "Appuyer sur A pour prendre une nouvelle photo"
                 display.image_displayed = image
                 display.update()
                 camera.hide_preview()
