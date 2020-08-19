@@ -59,6 +59,8 @@ class DisplayUI:
 
         self.screen.blit(self.background, (0, 0))
 
+        pygame.display.flip()
+
 
 class Camera:
     """ Manage the camera (Raspberry Camera) """
