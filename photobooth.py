@@ -27,24 +27,9 @@ class DisplayUI:
         self.background = self.surface.convert()
 
         # Displayed message
-        self.little_message = ""
+        self.message = ""
         self.number = ""
         self.image_displayed = ""
-
-    def set_little_message(self, msg):
-        """ Define the message to display in top of the screen """
-        self.little_message = msg
-        return self
-
-    def set_number(self, number):
-        """ Define the number to display in the middle of the screen """
-        self.number = number
-        return self
-
-    def set_image_displayed(self, photo_path):
-        """ Define the path of the picture to display """
-        self.image_displayed = photo_path
-        return self
 
     def _get_text_pos_center(self, text):
         """ Return the text  """
@@ -54,30 +39,23 @@ class DisplayUI:
         return textpos
 
     def update(self):
-        """ Met a jour l'affichage """
+        """ Update display """
         self.background.fill(pygame.Color("black"))  # Black background
 
         small_font = pygame.font.Font(None, 30)
 
-        if not self.image_displayed == "":
+        if self.image_displayed:
             picture = pygame.image.load(self.image_displayed)
             picture = pygame.transform.scale(picture, (1440, 1050))
             self.background.blit(picture, (120, 0))
 
-        if not self.number == "":
+        if self.number:
             font = pygame.font.Font(None, 500)
             text = font.render(self.number, 1, (0, 0, 255))
             self.background.blit(text, self._get_text_pos_center(text))
 
-        if not self.little_message == "":
-            self.background.blit(
-                small_font.render(
-                    self.little_message,
-                    1,
-                    (255, 255, 255)
-                ),
-                (0, 0)
-            )
+        if self.message:
+            self.background.blit(small_font.render(self.message, 1, (255, 255, 255)), (0, 0))
 
         self.screen.blit(self.background, (0, 0))
 
@@ -93,7 +71,8 @@ class Camera:
     def __init__(self, display, save_path):
         """ Turn on the camera, and display a message  """
         self.display = display
-        self.display.set_little_message("Chargement...").update()
+        self.display.message = "Chargement..."
+        self.display.update()
         self.save_path = save_path
 
         self.camera = picamera.PiCamera()
@@ -115,9 +94,10 @@ class Camera:
 
     def capture(self):
         """ Capture a photo after a countdown of 5 seconds """
-        self.display.set_message("")
+        self.display.message = ""
         for countdown in ["5", "4", "3", "2", "1"]:
-            self.display.set_number(countdown).update()
+            self.display.number = countdown
+            self.display.update()
             time.sleep(1)
 
         filename = 'photo_'
@@ -126,7 +106,9 @@ class Camera:
 
         # capture the image
         self.camera.capture(os.path.join(self.save_path, filename))
-        self.display.set_number("").set_message("").update()
+        self.display.number = ""
+        self.display.message = ""
+        self.display.update()
 
         return os.path.join(self.save_path, filename)
 
@@ -135,7 +117,8 @@ if __name__ == "__main__":
     display = DisplayUI()
     camera = Camera(display, SAVE_PATH_ROOT)
 
-    display.set_little_message("").update()
+    display.message = ""
+    display.update()
 
     # True if the user asked to exit
     should_exit = False
@@ -145,16 +128,18 @@ if __name__ == "__main__":
     image_displayed = False
 
     while not should_exit:
-
         # Gestion du message affiche et de l'ecran affiche (photo ou prise de vue)
         if image == "":
-            display.set_little_message("A pour prendre une photo").set_image_displayed("").update()
+            display.message = "A pour prendre une photo"
+            display.image_displayed = ""
+            display.update()
             image_displayed = False
             camera.show_preview()
         else:
             if not image_displayed:
-                display.set_little_message("Appuyer sur A pour prendre une nouvelle photo").set_image_displayed(
-                    image).update()
+                display.message = "Appuyer sur A pour prendre une nouvelle photo"\
+                display.image_displayed = image
+                display.update()
                 camera.hide_preview()
                 image_displayed = True
 
